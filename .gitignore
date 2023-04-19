@@ -1,0 +1,6 @@
+# Python stuff
+__pycache__/
+*/__pycache__/
+
+# Mindless ramblings
+notes.txt
