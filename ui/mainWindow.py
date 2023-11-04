@@ -66,6 +66,8 @@ class cryptoolWindow(QMainWindow):
         self.optionsLayout.addWidget(self.clearButton, 3, 2)
         self.goButton = QPushButton("Go")
         self.optionsLayout.addWidget(self.goButton, 3, 3)
+        self.byByteCheck = QCheckBox("By Byte")
+        self.optionsLayout.addWidget(self.byByteCheck, 3, 1)
         
         self.generalLayout.addLayout(self.optionsLayout)
 

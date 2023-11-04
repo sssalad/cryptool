@@ -10,8 +10,14 @@ def goButton(view):
         convertFrom = view.convertOptionsFrom.currentText()
         convertTo = view.convertOptionsTo.currentText()
         input = view.inputBox.toPlainText()
-        output = convertMain(convertFrom, convertTo, input)
-        view.displayOutput(str(output))
+        byBytes = view.byByteCheck.isChecked()
+        output = convertMain(convertFrom, convertTo, input, byBytes)
+
+        toDisplay = ''
+        for item in output:
+            toDisplay += item + ' '
+
+        view.displayOutput(str(toDisplay))
     elif action == "Encrypt":
         #call function
         print("running encrypt")
@@ -33,7 +39,6 @@ class cryptool:
 
 def main():
     cryptoolApp = QApplication([])
-    #cryptoolWindowView = cryptoolWindow()
     cryptoolWindowView = cryptoolWindow.cryptoolWindow()
     cryptoolWindowView.show()
     cryptool(view=cryptoolWindowView)

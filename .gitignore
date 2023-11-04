@@ -2,5 +2,8 @@
 __pycache__/
 */__pycache__/
 
+# Testing
+*Test.py
+
 # Mindless ramblings
 notes.txt
