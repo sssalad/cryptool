@@ -16,23 +16,23 @@ def getByteSize(convertFrom):
 def addPadding(input, convertFrom):
     paddedInput = ''
     if convertFrom == 'Binary':
-        paddedInput = ('0' * (8 - (len(input) % 8))) + input
+        if (len(input) % 8) == 0:
+            paddedInput = input
+        else:
+            paddedInput = ('0' * (8 - (len(input) % 8))) + input
     elif convertFrom == 'Decimal':
         paddedInput = paddedInput #should throw some kind of error
     elif convertFrom == 'Hexidecimal':
-        paddedInput = ('0' * (2 - (len(input) % 2))) + input
+        if (len(input) % 2) == 0:
+            paddedInput = input
+        else:
+            paddedInput = ('0' * (2 - (len(input) % 2))) + input
     elif convertFrom == 'Base64':
         paddedInput = paddedInput #should throw some kind of error
     elif convertFrom == 'Text':
         paddedInput = paddedInput #should throw some kind of error
     
     return paddedInput
-
-def splitByBytes(input, byteSize):
-    result = input
-    if len(input) > 2:
-        result = ' '.join(input[i:i + 2] for i in range(0, len(input), 2))
-    return result
 
 # Expects input is already padded
 def splitByBytes(paddedInput, convertFrom):

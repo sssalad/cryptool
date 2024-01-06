@@ -9,18 +9,13 @@ def binaryToText(binaryString):
     return str(text)
 
 def binaryToHex(binaryString):
-    if (len(binaryString) % 4 != 0):
-        print("Length of binary bits are not a multiple of 4")
     dec = int(binaryString, 2)
     hexidecimal = hex(dec)
     hexidecimal = hexidecimal[2:]
-    hexidecimal = hexidecimal.zfill(int(len(binaryString) / 4))
     return str(hexidecimal)
 
 # https://pythontic.com/containers/bytes/fromhex
 def binaryToB64(binaryString):
-    if(len(binaryString) % 8 != 0):
-        print("Length of binary bits are not a multiple of 8")
     hexidecimal = binaryToHex(binaryString)
     if (len(hexidecimal) % 2 == 1):
         hexidecimal = hexidecimal.zfill(len(hexidecimal) + 1)
