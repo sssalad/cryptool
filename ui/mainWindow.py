@@ -1,7 +1,6 @@
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import QDoubleValidator, QIntValidator, QRegularExpressionValidator
 import string
-from functools import partial
 
 WINDOW_WIDTH = 1000
 WINDOW_HEIGHT = 750

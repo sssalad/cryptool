@@ -1,5 +1,10 @@
 from converters import *
+from encryptors import *
+import string
 
+########################
+### Helper Functions ###
+########################
 
 def getByteSize(convertFrom):
     if convertFrom == 'Binary':
@@ -47,9 +52,37 @@ def splitByBytes(paddedInput, convertFrom):
 
     return result
 
+def determineEncoding(input):
+    # 1 = binary
+    # 2 = decimal 
+    # 3 = hex
+    # 4 = base64
+    # 5 = text
+    if all((character in "01") for character in input):
+        return 1
+    elif all((character in string.digits) for character in input):
+        return 2
+    elif all((character in string.hexdigits) for character in input):
+        return 3
+    elif all((character in (string.ascii_letters + string.digits + "+/=")) for character in input):
+        return 4
+    elif all((character in (string.ascii_letters + string.digits + string.punctuation)) for character in input):
+        return 5
+    else:
+        return -1 #Encoding not found
+    
 
 
-def convertMain(convertFrom, convertTo, input, byBytes):
+######################
+### Main Functions ###
+######################
+
+def convertMain(view):
+    convertFrom = view.convertOptionsFrom.currentText()
+    convertTo = view.convertOptionsTo.currentText()
+    input = view.inputBox.toPlainText()
+    byBytes = view.byByteCheck.isChecked()
+
     result = []
     input = input.strip()
     input = addPadding(input, convertFrom)
@@ -133,4 +166,22 @@ def convertMain(convertFrom, convertTo, input, byBytes):
                 result.append(textToB64(item))
         elif convertTo == 'Text':
             result = input
+    return result
+
+def encryptMain(view):
+    result = ''
+
+    if view.encryptOptions.currentText() == "Caesar Cipher":
+        input = view.inputBox.toPlainText()
+        alphabet = view.ccAlphabet
+        shift = view.ccShift
+        maintainCase = view.ccMaintainCase
+        maintainForeignChar = view.ccMaintainForeignChar
+        shiftNumbers = view.ccShiftNumbers
+
+        result = caesarCipherMain(input, alphabet, int(shift), maintainCase, maintainForeignChar, shiftNumbers)
+
+    if view.encryptOptions.currentText() == "XOR":
+        result = XORMain()
+
     return result

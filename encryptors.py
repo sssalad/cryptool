@@ -36,3 +36,6 @@ def caesarCipherMain(input, alphabet, shift, maintainCase, maintainForeignChar, 
             if maintainForeignChar:
                 output += inputChar
     return output
+
+def XORMain():
+    return 0
