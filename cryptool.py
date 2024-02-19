@@ -3,7 +3,6 @@ from PyQt6.QtWidgets import *
 from functools import partial
 import ui.mainWindow as cryptoolWindow
 from cryptoolFunctions import convertMain, encryptMain
-#from encryptors import *
 
 def goButton(view):
     action = view.action

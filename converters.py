@@ -5,8 +5,11 @@ from base64 import b64encode, b64decode
 ########################
 def binaryToText(binaryString):
     dec = int(binaryString, 2)
-    text = dec.to_bytes((dec.bit_length() + 7) // 8, 'big').decode()
-    return str(text)
+    try:
+        text = dec.to_bytes((dec.bit_length() + 7) // 8, 'big').decode()
+        return str(text).toUtf8()
+    except:
+        return "[Non-ASCII Result :(]"
 
 def binaryToHex(binaryString):
     dec = int(binaryString, 2)
@@ -57,7 +60,6 @@ def textToBinary(text):
     finalString = ''
     for byte in byteList:
         finalString += byte.zfill(8) 
-        #finalString += ' '
     return finalString
 
 def textToHex(text):

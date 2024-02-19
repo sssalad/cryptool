@@ -35,7 +35,7 @@ def addPadding(input, convertFrom):
     elif convertFrom == 'Base64':
         paddedInput = paddedInput #should throw some kind of error
     elif convertFrom == 'Text':
-        paddedInput = paddedInput #should throw some kind of error
+        paddedInput = input #should throw some kind of error
     
     return paddedInput
 
@@ -182,6 +182,12 @@ def encryptMain(view):
         result = caesarCipherMain(input, alphabet, int(shift), maintainCase, maintainForeignChar, shiftNumbers)
 
     if view.encryptOptions.currentText() == "XOR":
-        result = XORMain()
+        input = view.inputBox.toPlainText()
+        inputType = view.XORinputType
+        outputType = view.XORoutputType
+        key = view.XORKey
+        keyType = view.XORkeyType
+
+        result = XORMain(input, inputType, outputType, key, keyType)
 
     return result

@@ -48,6 +48,43 @@ class caesarCipherPopup(QWidget):
     def setCCSettings(self):
         self.parent.setCCSettings(self.ccAlphabet.text(), self.ccShift.text(), self.ccMaintainCase.isChecked(), self.ccMaintainForeignChar.isChecked(), self.ccShiftNumbers.isChecked())
 
+class XORPopup(QWidget):
+    def __init__(self, parent=None):
+        self.parent = parent
+
+        QWidget.__init__(self)
+        self.setWindowTitle("XOR Settings")
+
+        encodingTypes = ["Binary", "Decimal", "Hexidecimal", "Base64", "Text"]
+        self.XORinputType = QComboBox()
+        self.XORoutputType = QComboBox()
+        self.XORkeyType = QComboBox()
+        self.XORinputType.addItems(encodingTypes)
+        self.XORoutputType.addItems(encodingTypes)
+        self.XORkeyType.addItems(encodingTypes)
+
+        self.XORKey = QLineEdit()
+
+        self.SaveButton = QPushButton("Save")
+        self.SaveButton.clicked.connect(self.setXORSettings)
+
+        self.layout = QFormLayout()
+        self.layout.addRow("Input Type:", self.XORinputType)
+        self.layout.addRow("Output Type:", self.XORoutputType)
+        self.layout.addRow("Key:", self.XORKey)
+        self.layout.addRow("Key Type:", self.XORkeyType)
+        self.layout.addRow("", self.SaveButton)
+        self.setLayout(self.layout)
+
+        # Send default settings to the main window
+        self.parent.setXORSettings(self.XORinputType.currentText(), self.XORoutputType.currentText(), self.XORKey.text(), self.XORkeyType.currentText())
+
+    # Set values here, and also set them in the main window
+    def setXORSettings(self):
+        self.parent.setXORSettings(self.XORinputType.currentText(), self.XORoutputType.currentText(), self.XORKey.text(), self.XORkeyType.currentText())
+
+
+
 class cryptoolWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -61,8 +98,6 @@ class cryptoolWindow(QMainWindow):
         self._createOptions()
         self._creatOutputBox()
         self.action = ''
-
-        self.cc = caesarCipherPopup(parent=self)
 
     def _createInputBox(self):
         self.inputBox = QPlainTextEdit()
@@ -144,8 +179,14 @@ class cryptoolWindow(QMainWindow):
     def settingsPopup(self):
         #self.cc = caesarCipherPopup()
         #self.cc.setGeometry(100, 100, 400, 200) # how to place nicely in the middle?
-        self.cc.resize(400, 200)
-        self.cc.show()
+        if self.encryptOptions.currentText() == "Caesar Cipher":
+            self.cc = caesarCipherPopup(parent=self)
+            self.cc.resize(400, 200)
+            self.cc.show()
+        elif self.encryptOptions.currentText() == "XOR":
+            self.xor = XORPopup(parent=self)
+            self.xor.resize(400, 200)
+            self.xor.show()
 
     def setCCSettings(self, alphabet, shift, maintainCase, maintainForeignChar, shiftNumbers):
         self.ccAlphabet = alphabet
@@ -153,3 +194,9 @@ class cryptoolWindow(QMainWindow):
         self.ccMaintainCase = maintainCase
         self.ccMaintainForeignChar = maintainForeignChar
         self.ccShiftNumbers = shiftNumbers
+
+    def setXORSettings(self, inputType, outputType, key, keyType):
+        self.XORinputType = inputType
+        self.XORoutputType = outputType
+        self.XORKey = key
+        self.XORkeyType = keyType

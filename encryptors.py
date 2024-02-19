@@ -37,5 +37,53 @@ def caesarCipherMain(input, alphabet, shift, maintainCase, maintainForeignChar, 
                 output += inputChar
     return output
 
-def XORMain():
-    return 0
+def XORMain(input, inputType, outputType, key, keyType):
+    #convert everything to binary
+    inputBinary = ''
+    keyBinary = ''
+    outputBinary = ''
+    output = ''
+
+    if inputType == 'Binary':
+        inputBinary = input 
+    elif inputType == 'Decimal':
+        inputBinary = decimalToBinary(input)
+    elif inputType == 'Hexidecimal':
+        inputBinary = hexToBinary(input)
+    elif inputType == 'Base64':
+        inputBinary = base64ToBinary(input)
+    elif inputType == 'Text':
+        inputBinary = textToBinary(input)
+
+    if keyType == 'Binary':
+        keyBinary = key 
+    elif keyType == 'Decimal':
+        keyBinary = decimalToBinary(key)
+    elif keyType == 'Hexidecimal':
+        keyBinary = hexToBinary(key)
+    elif keyType == 'Base64':
+        keyBinary = base64ToBinary(key)
+    elif keyType == 'Text':
+        keyBinary = textToBinary(key)
+    
+    #do xor
+    for i in range(len(inputBinary)):
+        if (inputBinary[i] != keyBinary[i % len(keyBinary)]):
+            outputBinary += '1'
+        else:
+            outputBinary += '0'
+
+    print("output binary: " + outputBinary)
+    #convert output to proper format
+    if outputType == 'Binary':
+        output = outputBinary 
+    elif outputType == 'Decimal':
+        output = binaryToDecimal(outputBinary)
+    elif outputType == 'Hexidecimal':
+        output = binaryToHex(outputBinary)
+    elif outputType == 'Base64':
+        output = binaryToB64(outputBinary)
+    elif outputType == 'Text':
+        output = binaryToText(outputBinary)
+
+    return output
