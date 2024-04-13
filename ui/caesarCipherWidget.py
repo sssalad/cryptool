@@ -1,4 +1,5 @@
 from PyQt6.QtWidgets import *
+from PyQt6.QtGui import QIntValidator
 import string
 from encryptors import caesarCipherMain
 
@@ -32,6 +33,7 @@ class caesarCipherWidget(QWidget):
 
         self.layout.addWidget(QLabel("Shift:"), 1, 2)
         self.shift = QLineEdit()
+        self.shift.setValidator(QIntValidator())
         self.shift.insert("7")
         self.layout.addWidget(self.shift, 1, 3)
 
