@@ -1,5 +1,4 @@
 from converters import *
-from encryptors import *
 import string
 
 ########################
@@ -77,19 +76,14 @@ def determineEncoding(input):
 ### Main Functions ###
 ######################
 
-def convertMain(view):
-    convertFrom = view.convertOptionsFrom.currentText()
-    convertTo = view.convertOptionsTo.currentText()
-    input = view.inputBox.toPlainText()
-    byBytes = view.byByteCheck.isChecked()
-
+def encodeMain(input, convertFrom, convertTo, byBytes):
     result = []
     input = input.strip()
     input = addPadding(input, convertFrom)
     if byBytes:
         input = splitByBytes(input, convertFrom)
     else:
-        input = [input] 
+        input = input.split(' ') 
 
     if convertFrom == 'Binary':
         if convertTo == 'Binary':
@@ -166,28 +160,4 @@ def convertMain(view):
                 result.append(textToB64(item))
         elif convertTo == 'Text':
             result = input
-    return result
-
-def encryptMain(view):
-    result = ''
-
-    if view.encryptOptions.currentText() == "Caesar Cipher":
-        input = view.inputBox.toPlainText()
-        alphabet = view.ccAlphabet
-        shift = view.ccShift
-        maintainCase = view.ccMaintainCase
-        maintainForeignChar = view.ccMaintainForeignChar
-        shiftNumbers = view.ccShiftNumbers
-
-        result = caesarCipherMain(input, alphabet, int(shift), maintainCase, maintainForeignChar, shiftNumbers)
-
-    if view.encryptOptions.currentText() == "XOR":
-        input = view.inputBox.toPlainText()
-        inputType = view.XORinputType
-        outputType = view.XORoutputType
-        key = view.XORKey
-        keyType = view.XORkeyType
-
-        result = XORMain(input, inputType, outputType, key, keyType)
-
     return result
