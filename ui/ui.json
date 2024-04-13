@@ -1,0 +1,13 @@
+{
+  "Encode": [],
+  "Encrypt (Basic)": [
+    "Caesar Cipher",
+    "XOR"
+  ],
+  "RSA": [
+    "Encrypt"
+  ],
+  "Crack": [
+    "Weiners"
+  ]
+}
