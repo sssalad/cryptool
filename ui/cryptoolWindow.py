@@ -2,10 +2,11 @@ import os
 import json
 from PyQt6.QtWidgets import *
 from PyQt6.QtCore import Qt
-from ui.encodeWidget import encodeWidget
+from ui import encodeWidget, XORWidget, caesarCipherWidget
 
 WINDOW_WIDTH = 1000
 WINDOW_HEIGHT = 750
+UI_OPTIONS_TREE_JSON = (os.getcwd() + '\\ui\\ui.json')
 
 class cryptoolWindow(QMainWindow):
     def __init__(self):
@@ -27,7 +28,7 @@ class cryptoolWindow(QMainWindow):
 
     
     def _createOptionsTree(self):
-        inputFile = open(os.getcwd() + '\\ui\\ui.json') # use cwd at some point in the future 
+        inputFile = open(UI_OPTIONS_TREE_JSON)
         data = json.load(inputFile)
     
         self.optionsTree = QTreeWidget()
@@ -48,7 +49,16 @@ class cryptoolWindow(QMainWindow):
         parent = item.parent()
         #parentName = parent.text(0)
         itemName = item.text(0)
+        # Clear the layout before we add something else
+        if (self.generalLayout.itemAtPosition(0, 1) != None):
+            self.generalLayout.itemAtPosition(0, 1).widget().deleteLater()
 
         if (itemName == 'Encode'):# or parentName == 'Encode'):
-            encode = encodeWidget()
+            encode = encodeWidget.encodeWidget()
             self.generalLayout.addWidget(encode, 0, 1, 4, 3)
+        elif (itemName == 'Caesar Cipher'):
+            caesars = caesarCipherWidget.caesarCipherWidget()
+            self.generalLayout.addWidget(caesars, 0, 1, 4, 3)
+        elif (itemName == 'XOR'):
+            xor = XORWidget.XORWidget()
+            self.generalLayout.addWidget(xor, 0, 1, 4, 3)
