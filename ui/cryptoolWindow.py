@@ -1,4 +1,5 @@
 import os
+import platform
 import json
 from PyQt6.QtWidgets import *
 from PyQt6.QtCore import Qt
@@ -6,7 +7,6 @@ from ui import encodeWidget, XORWidget, caesarCipherWidget
 
 WINDOW_WIDTH = 1000
 WINDOW_HEIGHT = 750
-UI_OPTIONS_TREE_JSON = (os.getcwd() + '\\ui\\ui.json')
 
 class cryptoolWindow(QMainWindow):
     def __init__(self):
@@ -28,6 +28,11 @@ class cryptoolWindow(QMainWindow):
 
     
     def _createOptionsTree(self):
+        if (platform.system() == 'Windows'):
+            UI_OPTIONS_TREE_JSON = (os.getcwd() + '\\ui\\ui.json')
+        elif (platform.system() == 'Linux'):
+            UI_OPTIONS_TREE_JSON = (os.getcwd() + '/ui/ui.json')
+
         inputFile = open(UI_OPTIONS_TREE_JSON)
         data = json.load(inputFile)
     
