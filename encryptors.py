@@ -73,7 +73,6 @@ def XORMain(input, inputType, outputType, key, keyType):
         else:
             outputBinary += '0'
 
-    print("output binary: " + outputBinary)
     #convert output to proper format
     if outputType == 'Binary':
         output = outputBinary 

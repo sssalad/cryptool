@@ -3,7 +3,7 @@ import platform
 import json
 from PyQt6.QtWidgets import *
 from PyQt6.QtCore import Qt
-from ui import encodeWidget, XORWidget, caesarCipherWidget
+from ui import encodeWidget, XORWidget, caesarCipherWidget, rsaWidget
 
 WINDOW_WIDTH = 1000
 WINDOW_HEIGHT = 750
@@ -67,3 +67,6 @@ class cryptoolWindow(QMainWindow):
         elif (itemName == 'XOR'):
             xor = XORWidget.XORWidget()
             self.generalLayout.addWidget(xor, 0, 1, 4, 3)
+        elif (itemName == 'Encrypt'):
+            rsaEncrypt = rsaWidget.rsaWidget()
+            self.generalLayout.addWidget(rsaEncrypt, 0, 1, 4, 3)
