@@ -15,6 +15,7 @@ class rsaWidget(QWidget):
         # Connect slots
         self.clearButton.clicked.connect(self.clearDisplay)
         self.goButton.clicked.connect(self.rsaGo)
+        self.inputKeyBox.textChanged.connect(self.getRSANumbers)
 
         self.setLayout(self.layout)
 
@@ -57,17 +58,32 @@ class rsaWidget(QWidget):
         self.inputKeyBox.clear()
         self.outputBox.clear()
 
-    def displayOutput(self, textList):
-        toDisplay = ''
-        for item in textList:
-            toDisplay = toDisplay + str(item) + ''
-
+    def displayOutput(self, toDisplay):
         self.outputBox.setPlainText(toDisplay)
 
+    def getRSANumbers(self):
+        if self.inputKeyBox.toPlainText() != '':
+            self.modulus.setText('')
+            self.e.setText('')
+            self.d.setText('')
+
+            inputKey = self.inputKeyBox.toPlainText()
+            rsaNumbers = getNumbersFromPEMRSAKey(inputKey)
+            if rsaNumbers == 'error':
+                self.modulus.setText('?')
+                self.e.setText('?')
+                self.d.setText('?')
+            else:
+                for num in rsaNumbers:
+                    if num == 'n':
+                        self.modulus.setText(str(rsaNumbers[num]))
+                    elif num == 'e':
+                        self.e.setText(str(rsaNumbers[num]))
+                    elif num == 'd':
+                        self.d.setText(str(rsaNumbers[num]))
+
     def rsaGo(self):
-        inputKey = self.inputKeyBox.toPlainText()
-        #keyModulus = getNFromASN1(inputKey)
-        #self.modulus.setText(str(keyModulus))
-        rsaNumbers = getNumbersFromPEMRSAKey(inputKey)
-        for num in rsaNumbers:
-            print(str(num) + ": " + str(rsaNumbers[num]))
+        message = self.inputMessageBox.toPlainText()
+        key = self.inputKeyBox.toPlainText()
+        result = rsaDencrypt(key, message)
+        self.displayOutput(result)
