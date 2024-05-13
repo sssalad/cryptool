@@ -1,5 +1,6 @@
 from PyQt6.QtWidgets import *
 from rsa.rsaHelpers import *
+from Crypto.PublicKey import RSA
 
 class rsaWidget(QWidget):
     def __init__(self):
@@ -29,22 +30,37 @@ class rsaWidget(QWidget):
         self.layout.addWidget(self.inputKeyBox, 0, 2, 1, 2)
 
     def _createOptions(self):
-        self.layout.addWidget(QLabel("N:"), 2, 0)
+        
+        self.rsaOptionsWidget = QGridLayout()
+
+        self.rsaOptionsWidget.addWidget(QLabel("N:"), 0, 0)
         self.modulus = QLineEdit()
-        self.layout.addWidget(self.modulus, 2, 1)
+        self.rsaOptionsWidget.addWidget(self.modulus, 0, 1)
 
-        self.layout.addWidget(QLabel("e:"), 2, 2)
+        self.rsaOptionsWidget.addWidget(QLabel("e:"), 0, 2)
         self.e = QLineEdit()
-        self.layout.addWidget(self.e, 2, 3)
+        self.rsaOptionsWidget.addWidget(self.e, 0, 3)
 
-        self.layout.addWidget(QLabel("d:"), 2, 4)
+        self.rsaOptionsWidget.addWidget(QLabel("d:"), 0, 4)
         self.d = QLineEdit()
-        self.layout.addWidget(self.d, 2, 5)
+        self.rsaOptionsWidget.addWidget(self.d, 0, 5)
+
+        self.paddingTypes = ['None', 'PSS', 'OAEP', 'PKCS1v15']
+        self.paddingType = QComboBox()
+        self.paddingType.addItems(self.paddingTypes)
+        self.rsaOptionsWidget.addWidget(QLabel("Padding:"), 1, 2)
+        self.rsaOptionsWidget.addWidget(self.paddingType, 1, 3)
+        
+        self.layout.addLayout(self.rsaOptionsWidget, 2, 0, 1, 4)
+
+
+
+
 
         self.clearButton = QPushButton("Clear")
-        self.layout.addWidget(self.clearButton, 3, 2)
+        self.layout.addWidget(self.clearButton, 3, 1)
         self.goButton = QPushButton("Go")
-        self.layout.addWidget(self.goButton, 3, 3)
+        self.layout.addWidget(self.goButton, 3, 2)
     
     def _createOutputBox(self):
         self.outputBox = QPlainTextEdit()

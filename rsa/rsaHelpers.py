@@ -1,6 +1,7 @@
 import base64
 from cryptography.hazmat.primitives import serialization, hashes
 from cryptography.hazmat.primitives.asymmetric import padding
+from converters import base64ToDecimal, decimalToBase64
 
 
 def getNumbersFromPEMRSAKey(rsaKey):
@@ -43,3 +44,11 @@ def rsaDencrypt(rsaKey, message):
             )
         )
         return plaintext.decode('utf-8')
+    
+# Home made RSA stuff 
+def getDecimalsFromPEMRSAKey(rsaKey):
+    b64Numbers = getNumbersFromPEMRSAKey(rsaKey)
+    decNumbers = {}
+    for num in b64Numbers:
+        decNumbers[num] = base64ToDecimal(b64Numbers[num])
+    return decNumbers
