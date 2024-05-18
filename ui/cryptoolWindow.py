@@ -3,7 +3,7 @@ import platform
 import json
 from PyQt6.QtWidgets import *
 from PyQt6.QtCore import Qt
-from ui import encodeWidget, XORWidget, caesarCipherWidget, rsaWidget
+from ui import encodeWidget, XORWidget, caesarCipherWidget, rsaWidget, WienerWidget
 
 WINDOW_WIDTH = 1000
 WINDOW_HEIGHT = 750
@@ -51,8 +51,11 @@ class cryptoolWindow(QMainWindow):
         self.generalLayout.addWidget(self.optionsTree, 0, 0, alignment=Qt.AlignmentFlag.AlignLeft)
 
     def initializeItem(self, item):
-        parent = item.parent()
-        #parentName = parent.text(0)
+        try:
+            parent = item.parent()
+            parentName = parent.text(0)
+        except:
+            parentName = "NULL"
         itemName = item.text(0)
         # Clear the layout before we add something else
         if (self.generalLayout.itemAtPosition(0, 1) != None):
@@ -67,6 +70,9 @@ class cryptoolWindow(QMainWindow):
         elif (itemName == 'XOR'):
             xor = XORWidget.XORWidget()
             self.generalLayout.addWidget(xor, 0, 1, 4, 3)
-        elif (itemName == 'Encrypt'):
+        elif (parentName == 'RSA' and itemName == 'Encrypt'):
             rsaEncrypt = rsaWidget.rsaWidget()
             self.generalLayout.addWidget(rsaEncrypt, 0, 1, 4, 3)
+        elif (itemName == 'Wieners'):
+            wiener = WienerWidget.WienerWidget()
+            self.generalLayout.addWidget(wiener, 0, 1, 4, 3)

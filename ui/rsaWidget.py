@@ -1,6 +1,5 @@
 from PyQt6.QtWidgets import *
 from rsa.rsaHelpers import *
-from Crypto.PublicKey import RSA
 
 class rsaWidget(QWidget):
     def __init__(self):
