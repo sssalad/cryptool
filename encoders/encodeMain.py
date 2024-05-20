@@ -76,10 +76,11 @@ def determineEncoding(input):
 ### Main Functions ###
 ######################
 
-def encodeMain(input, convertFrom, convertTo, byBytes):
+def encodeMain(input, convertFrom, convertTo, byBytes, leadingZeros):
     result = []
     input = input.strip()
-    input = addPadding(input, convertFrom)
+    if leadingZeros:
+        input = addPadding(input, convertFrom)
     if byBytes:
         input = splitByBytes(input, convertFrom)
     else:
@@ -160,4 +161,9 @@ def encodeMain(input, convertFrom, convertTo, byBytes):
                 result.append(textToB64(item))
         elif convertTo == 'Text':
             result = input
+
+    if byBytes or (convertTo == 'Text'):
+        result = ' '.join(result)
+    else:
+        result = ''.join(result)
     return result

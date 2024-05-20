@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import *
 from PyQt6.QtCore import Qt
-from encodeMain import encodeMain
+from encoders.encodeMain import encodeMain
 
 class encodeWidget(QWidget):
     def __init__(self):
@@ -36,7 +36,9 @@ class encodeWidget(QWidget):
         self.layout.addWidget(self.convertOptionsTo, 1, 3)
 
         self.byByteCheck = QCheckBox("By Byte")
-        self.layout.addWidget(self.byByteCheck, 2, 1)
+        self.layout.addWidget(self.byByteCheck, 2, 0)
+        self.leadingZeros = QCheckBox("Leading 0s")
+        self.layout.addWidget(self.leadingZeros)
         self.clearButton = QPushButton("Clear")
         self.layout.addWidget(self.clearButton, 2, 2)
         self.goButton = QPushButton("Go")
@@ -65,6 +67,7 @@ class encodeWidget(QWidget):
         convertFrom = self.convertOptionsFrom.currentText()
         convertTo = self.convertOptionsTo.currentText()
         byBytes = self.byByteCheck.isChecked()
+        leadingZeros = self.leadingZeros.isChecked()
 
-        result = encodeMain(inputString, convertFrom, convertTo, byBytes)
+        result = encodeMain(inputString, convertFrom, convertTo, byBytes, leadingZeros)
         self.displayOutput(result)

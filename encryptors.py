@@ -1,5 +1,4 @@
-import string
-from converters import *
+from encoders.converters import *
 
 # this only works assuming everything is lowercase right now
 # also assumes alphabet is ONLY alphabetical characters

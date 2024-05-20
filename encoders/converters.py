@@ -5,10 +5,9 @@ from base64 import b64encode, b64decode
 ########################
 def binaryToText(binaryString):
     result = ''
-    for i in range(len(binaryString)):
-        hexChars = binaryToHex(binaryString[i:(i+8)])
-        result += hexToText(hexChars)
-        i += 8
+    for i in range(0, len(binaryString), 8):
+        asciiCode = binaryToDecimal(binaryString[i:(i+8)])
+        result += chr(int(asciiCode))
     return result
 
 
@@ -38,11 +37,12 @@ def hexToBinary(hexString):
     binaryString = binaryString.zfill(len(hexString) * 4)
     return str(binaryString)
 
-# This one needs to be adjusted to include 'for x in x+2...
 def hexToText(hexString):
-    dec = int(hexToDecimal(hexString))
-    text = chr(dec)
-    return str(text)
+    result = ''
+    for i in range(0, len(hexString), 2):
+        asciiCode = hexToDecimal(hexString[i:(i+2)])
+        result += chr(int(asciiCode))
+    return result
     
 
 def hexToB64(hexString):
@@ -71,10 +71,8 @@ def textToHex(text):
     return hexidecimal
 
 def textToB64(text):
-    b64 = b64encode(text.encode('ascii'))
-    #b64 = str(b64)
-    #return b64[2:(len(b64) - 1)]
-    return b64.decode('ascii')
+    b64 = b64encode(text.encode("utf-8"))
+    return b64.decode("utf-8")
 
 def textToDecimal(text):
     dec = ''
@@ -113,15 +111,16 @@ def base64ToDecimal(b64String): # does not work
 ##### Decimal to... #####
 #########################
 def decimalToBinary(decimal):
-    return bin(int(decimal)).replace("0b", "")
+    return bin(int(decimal)).replace("b", "")
 
 def decimalToHexidecimal(decimal):
-    return hex(int(decimal))
+    return hex(int(decimal)).replace("0x", "")
 
 def decimalToBase64(decimal):
-    return b64encode(bytes(str(decimal), 'ascii'))
+    binary = decimalToBinary(decimal)
+    result = binaryToB64(binary)
+    return result
 
-# Assuming there is a string of decimal numbers separated by spaces
 def decimalToText(decimal):
     binary = decimalToBinary(decimal)
     result = binaryToText(binary)
