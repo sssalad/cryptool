@@ -1,4 +1,4 @@
-from converters import *
+from encoders.converters import *
 import string
 
 ########################
