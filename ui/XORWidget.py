@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import *
-from encryptors import XORMain
+from encryptors.encryptors import XORMain
 
 class XORWidget(QWidget):
     def __init__(self):

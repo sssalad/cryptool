@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import QIntValidator
 import string
-from encryptors import caesarCipherMain
+from encryptors.encryptors import caesarCipherMain
 
 class caesarCipherWidget(QWidget):
     def __init__(self):
