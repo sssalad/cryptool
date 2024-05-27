@@ -13,16 +13,18 @@ Cryptool is a program intended to provide an all-in-one place to perform basic c
     * Caesar Cipher
     * XOR
 * RSA
-    * RSA Encryption
+    * RSA Encryption (Mostly Using the [Cryptography Library](https://github.com/pyca/cryptography))
 * Cracking
-    * Weiners Attack
+    * Wiener Attack (Using the [oWiener Library](https://github.com/orisano/owiener))
 
 
 
 ## Coming (Hopefully) Features
-* Octal Conversion
-* RSA Signing
-* RSA Signature Verification
+* [Conversion] Octal Conversion
+* [Basic Encryption] Vigenere Cipher
+* [RSA] RSA Signing
+* [RSA] RSA Signature Verification
+* [Cracking] Frequency Analyzer 
 
 ## Installation 
 ### Prerequisits
