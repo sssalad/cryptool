@@ -74,11 +74,12 @@ def textToB64(text):
     b64 = b64encode(text.encode("utf-8"))
     return b64.decode("utf-8")
 
-def textToDecimal(text):
+def textToDecimal(text, byByte=False):
     dec = ''
     for character in text:
         dec += str(ord(character))
-        dec += ' '
+        if byByte:
+            dec += ' '
     return dec
     
 
