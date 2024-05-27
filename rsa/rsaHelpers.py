@@ -2,6 +2,7 @@ import base64
 from cryptography.hazmat.primitives import serialization, hashes
 from cryptography.hazmat.primitives.asymmetric import padding
 import owiener
+from encoders.converters import *
 
 
 def getNumbersFromPEMRSAKey(rsaKey):
@@ -44,6 +45,17 @@ def rsaDencrypt(rsaKey, message):
             )
         )
         return plaintext.decode('utf-8')
+    
+def simpleRSAEncrypt(inputText, n, e):
+    inputBinary = textToBinary(inputText)
+    inputDecimal = binaryToDecimal(inputBinary)
+    cipherDecimal = pow(int(inputDecimal), e, n)
+    return cipherDecimal
+
+def simpleRSADecrypt(cipherDecimal, n, d):
+    clearDecimal = pow(cipherDecimal, d, n)
+    clearText = decimalToText(clearDecimal)
+    return clearText
     
 def WienerAttack(n, e):
     d = owiener.attack(e, n)
