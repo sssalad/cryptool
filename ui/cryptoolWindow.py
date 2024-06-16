@@ -2,6 +2,7 @@ import os
 import platform
 import json
 from PyQt6.QtWidgets import *
+from PyQt6.QtGui import *
 from PyQt6.QtCore import Qt
 from ui import encodeWidget, XORWidget, caesarCipherWidget, rsaWidget, WienerWidget
 
@@ -11,6 +12,12 @@ WINDOW_HEIGHT = 750
 class cryptoolWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+
+        if (platform.system() == 'Windows'):
+            iconImage = (os.getcwd() + '\\ui\\img\\icon.png')
+        elif (platform.system() == 'Linux'):
+            iconImage = (os.getcwd() + '/ui/img/icon.png')
+        self.setWindowIcon(QIcon(iconImage))
         self.setWindowTitle("cryptool")
         self.setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT)
         
