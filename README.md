@@ -26,6 +26,7 @@ Cryptool is a program intended to provide an all-in-one place to perform basic c
 * [RSA] RSA Signing/Signature Verification
 * [RSA] RSA Signature Verification
 * [RSA] Allow RSA operations using n, e, and d instead of only keys
+* [RSA] Include other types of padding
 * [Cracking] Frequency Analyzer 
 
 ## Installation 
