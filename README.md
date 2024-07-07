@@ -1,6 +1,6 @@
 # Cryptool
 
-Cryptool is a program intended to provide an all-in-one place to perform basic cryptographic operations. There are many online tools that can do the same things Cryptool does. Cryptool's aim is to put them all together and give the user as much freedom and customization as possible.
+Cryptool is a program intended to provide an all-in-one place to perform basic cryptographic operations. There are many online tools that can do the same things Cryptool does. Cryptool's aim is to put them all together and give the user as much freedom and customization as possible. This is a work in progress and I hope to keep adding features in the future, as time allows.
 
 ## Features
 * Converstion to and from:
@@ -20,10 +20,12 @@ Cryptool is a program intended to provide an all-in-one place to perform basic c
 
 
 ## Coming (Hopefully) Features
+* [UI] Make windows/widgets resizable
 * [Conversion] Octal Conversion
 * [Basic Encryption] Vigenere Cipher
-* [RSA] RSA Signing
+* [RSA] RSA Signing/Signature Verification
 * [RSA] RSA Signature Verification
+* [RSA] Allow RSA operations using n, e, and d instead of only keys
 * [Cracking] Frequency Analyzer 
 
 ## Installation 
@@ -45,3 +47,8 @@ pip install -r requirements.txt
 ```
 python cryptool.py
 ```
+
+## More Details
+### Conversion
+* Most of the conversion operations are straight forward. Keep in mind that:
+  * When converting anything to test, the 'By Byte' flag is irrelevant and leading 0s will be automatically included
