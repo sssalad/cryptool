@@ -44,7 +44,7 @@ class rsaWidget(QWidget):
         self.d = QLineEdit()
         self.rsaOptionsWidget.addWidget(self.d, 0, 5)
 
-        self.paddingTypes = ['None', 'PSS', 'OAEP', 'PKCS1v15']
+        self.paddingTypes = ['None', 'OAEP/SHA256']
         self.paddingType = QComboBox()
         self.paddingType.addItems(self.paddingTypes)
         self.rsaOptionsWidget.addWidget(QLabel("Padding:"), 1, 2)
@@ -100,5 +100,9 @@ class rsaWidget(QWidget):
     def rsaGo(self):
         message = self.inputMessageBox.toPlainText()
         key = self.inputKeyBox.toPlainText()
-        result = rsaDencrypt(key, message)
-        self.displayOutput(result)
+        padding = self.paddingType.currentText()
+        if padding == 'None':
+            result = simpleRSADencrypt(key, message)
+        else:
+            result = rsaDencrypt(key, message)
+        self.displayOutput(str(result))

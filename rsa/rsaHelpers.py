@@ -53,9 +53,20 @@ def simpleRSAEncrypt(inputText, n, e):
     return cipherDecimal
 
 def simpleRSADecrypt(cipherDecimal, n, d):
-    clearDecimal = pow(cipherDecimal, d, n)
+    clearDecimal = pow(int(cipherDecimal), d, n)
     clearText = decimalToText(clearDecimal)
     return clearText
+
+# Encrypt or decrypt
+def simpleRSADencrypt(rsaKey, message):
+    rsaNumbers = getNumbersFromPEMRSAKey(rsaKey)
+
+    if "-----BEGIN PUBLIC KEY-----" in rsaKey:
+        result = simpleRSAEncrypt(message, rsaNumbers['n'], rsaNumbers['e'])
+    elif "-----BEGIN RSA PRIVATE KEY-----" in rsaKey:
+        result = simpleRSADecrypt(message, rsaNumbers['n'], rsaNumbers['d'])
+
+    return result
     
 def WienerAttack(n, e):
     d = owiener.attack(e, n)

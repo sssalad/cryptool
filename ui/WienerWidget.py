@@ -25,10 +25,6 @@ class WienerWidget(QWidget):
         self.e = QLineEdit()
         self.layout.addWidget(self.e, 1, 1)
 
-        self.layout.addWidget(QLabel("[Optional] c:"), 2, 0)
-        self.cipherText = QLineEdit()
-        self.layout.addWidget(self.cipherText, 2, 1)
-
         self.clearButton = QPushButton("Clear")
         self.layout.addWidget(self.clearButton, 3, 0)
         self.goButton = QPushButton("Go")
@@ -39,10 +35,6 @@ class WienerWidget(QWidget):
         self.layout.addWidget(QLabel("d:"), 4, 0)
         self.d = QLineEdit()
         self.layout.addWidget(self.d, 4, 1)
-
-        self.layout.addWidget(QLabel("[Optional] m:"), 2, 0)
-        self.plainText = QLineEdit()
-        self.layout.addWidget(self.plainText, 2, 1)
 
     ########################################
     def clearDisplay(self):
