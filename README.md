@@ -35,7 +35,7 @@ Cryptool is a program intended to provide an all-in-one place to perform basic c
 
 ### Download or Clone this Repository
 ```
-git clone https://github.com/sssalad/cryptool
+git clone https://github.com/sssalad/cryptool.git
 ```
 
 ### Install Required Python Libraries
